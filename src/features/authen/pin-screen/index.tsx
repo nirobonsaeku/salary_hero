@@ -28,7 +28,7 @@ export const PinScreen = ({ navigation, route }) => {
       const newArray = [...value.slice(0, value.length - 1)];
       setValue(newArray);
     } else if (value.length == 6) {
-      navigation.navigate("MainTab");
+      navigation.replace("MainTab");
     }
   };
 
