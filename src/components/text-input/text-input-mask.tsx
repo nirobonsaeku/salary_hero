@@ -11,7 +11,7 @@ export const TextInputMask = React.forwardRef((props: any, ref) => {
     onChangeText,
     label,
     options = {
-      mask: "999-999-9999",
+      mask: "099-999-9999",
     },
     type = "custom",
   } = props;
