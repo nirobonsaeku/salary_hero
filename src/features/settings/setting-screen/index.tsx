@@ -1,16 +1,18 @@
-import React, { Fragment, useState, useEffect, useCallback } from "react";
-import { ScrollView, View } from "react-native";
-
+import React from "react";
+import { View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { List } from "../../../components/list";
-import { Gap } from "../../../components";
+import styles from "./styles";
 
 export const SettingScreen = ({ navigation, route }) => {
   return (
-    <View style={{ flex: 1, backgroundColor: "white" }}>
-      <SafeAreaView style={{ flex: 1 }}>
-        <List title={"Setting Pin"} />
-        <List title={"Logout"} />
+    <View style={styles.container}>
+      <SafeAreaView style={styles.flex}>
+        <List
+          title={"Setting Pin"}
+          onPress={() => navigation.navigate("ResetPin")}
+        />
+        <List title={"Logout"} onPress={() => navigation.replace("Login")} />
       </SafeAreaView>
     </View>
   );
