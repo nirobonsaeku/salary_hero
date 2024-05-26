@@ -18,16 +18,18 @@ import {
   DialPad,
   Pin,
 } from "../../../components";
+import { setPinCode } from "../../../services";
 export const PinScreen = ({ navigation, route }) => {
   const [value, setValue] = useState([]);
 
-  const onPressKey = (num) => {
+  const onPressKey =async (num) => {
     if (value.length < 6 && num !== "del") {
       setValue((prev) => [...prev, num]);
     } else if (num == "del") {
       const newArray = [...value.slice(0, value.length - 1)];
       setValue(newArray);
     } else if (value.length == 6) {
+      await setPinCode(value.join(""))
       navigation.replace("MainTab");
     }
   };

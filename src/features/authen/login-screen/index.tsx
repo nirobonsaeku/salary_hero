@@ -21,48 +21,45 @@ export const LoginScreen = ({ navigation, route }) => {
           phoneNumber: "",
         }}
         validationSchema={LoginSchema}
-        isInitialValid={false}
+        validateOnMount={true}
         onSubmit={(values) => {
           console.log(values);
         }}
       >
         {({ errors, touched, isValid, handleChange, values }) => (
-          console.log(`isValid`, isValid),
-          (
-            <>
-              <SafeAreaView
+          <>
+            <SafeAreaView
+              style={{
+                flex: 1,
+                justifyContent: "space-between",
+              }}
+            >
+              <Image
+                source={images.logo}
                 style={{
-                  flex: 1,
-                  justifyContent: "space-between",
+                  width: constant.width / 2,
+                  height: constant.width / 2,
+                  alignSelf: "center",
+                  marginTop: 30,
                 }}
-              >
-                <Image
-                  source={images.logo}
-                  style={{
-                    width: constant.width / 2,
-                    height: constant.width / 2,
-                    alignSelf: "center",
-                    marginTop: 30,
-                  }}
-                  resizeMode="contain"
-                />
-                <TextInputMask
-                  label="Phone Number"
-                  keyboardType="phone-pad"
-                  placeholder="กรุณากรอกเบอร์โทรศัพท์"
-                  value={values.phoneNumber}
-                  onChangeText={handleChange("phoneNumber")}
-                  name="phoneNumber"
-                />
-                <Button
-                  title="Login"
-                  onPress={() => navigation.navigate("Pin")}
-                  disabled={!isValid}
-                />
-                <Gap size={32} />
-              </SafeAreaView>
-            </>
-          )
+                resizeMode="contain"
+              />
+              <TextInputMask
+                label="Phone Number"
+                keyboardType="phone-pad"
+                placeholder="กรุณากรอกเบอร์โทรศัพท์"
+                value={values.phoneNumber}
+                onChangeText={handleChange("phoneNumber")}
+                name="phoneNumber"
+              />
+              <Button
+                title="Login"
+                onPress={() => navigation.navigate("Pin")}
+                disabled={!isValid}
+              />
+              <Gap size={32} />
+            </SafeAreaView>
+          </>
         )}
       </Formik>
     </ImageBackground>

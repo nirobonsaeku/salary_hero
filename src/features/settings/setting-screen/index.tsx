@@ -3,6 +3,8 @@ import { View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { List } from "../../../components/list";
 import styles from "./styles";
+import { logout } from "../../../services";
+
 
 export const SettingScreen = ({ navigation, route }) => {
   return (
@@ -12,7 +14,7 @@ export const SettingScreen = ({ navigation, route }) => {
           title={"Setting Pin"}
           onPress={() => navigation.navigate("ResetPin")}
         />
-        <List title={"Logout"} onPress={() => navigation.replace("Login")} />
+        <List title={"Logout"} onPress={() => logout()} />
       </SafeAreaView>
     </View>
   );
