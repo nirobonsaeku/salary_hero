@@ -14,6 +14,9 @@ const LoginSchema = Yup.object().shape({
 });
 
 export const LoginScreen = ({ navigation, route }) => {
+  const handleSubmit = (values) => {
+    console.log(`handleSubmit`, values);
+  };
   return (
     <ImageBackground source={images.bg} style={{ flex: 1 }}>
       <Formik
@@ -22,11 +25,9 @@ export const LoginScreen = ({ navigation, route }) => {
         }}
         validationSchema={LoginSchema}
         validateOnMount={true}
-        onSubmit={(values) => {
-          console.log(values);
-        }}
+        onSubmit={handleSubmit}
       >
-        {({ errors, touched, isValid, handleChange, values }) => (
+        {({ errors, touched, isValid, handleChange, values, handleSubmit }) => (
           <>
             <SafeAreaView
               style={{
@@ -54,7 +55,8 @@ export const LoginScreen = ({ navigation, route }) => {
               />
               <Button
                 title="Login"
-                onPress={() => navigation.navigate("Pin")}
+                // onPress={() => navigation.navigate("Pin")}
+                onPress={handleSubmit}
                 disabled={!isValid}
               />
               <Gap size={32} />

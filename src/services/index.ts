@@ -37,6 +37,21 @@ axiosApiEmbedHeader.interceptors.response.use(
   }
 );
 
+const request = async ({ params = null, url, method }) => {
+  return await axiosApiEmbedHeader({
+    url,
+    params,
+    method,
+  });
+};
+
+export const getTransaction = async () => {
+  return await request({
+    method: "get",
+    url: "/api/v1/user/transactions",
+  });
+};
+
 export const logout = async () => {
   await useRemoveAccessToken();
   RootNavigation.navigate(
@@ -65,7 +80,9 @@ export const useUpdateAccessToken = async (accessToken) => {
 
 export const getAccessToken = async () => {
   const credentials = await Keychain.getInternetCredentials(ACCESS_TOKEN);
-  return credentials;
+  console.log(`credentials`, credentials);
+  return "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyVWlkIjoiam9obl91aWQiLCJwaG9uZSI6IjEiLCJpYXQiOjE3MTY4MjExMzMsImV4cCI6MTcxNjgyMTMxM30.3OK2P38fv1mD7xfjvultbsbqhwP1Y5LIPx2WATjxamo";
+  // return credentials;
 };
 
 export const setPinCode = async (pin) => {
