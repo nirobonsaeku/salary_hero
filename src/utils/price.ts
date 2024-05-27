@@ -8,3 +8,16 @@ export const toPrice = (x) => {
   }
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
+
+export const calculateEarning = (earnings) => {
+  const date = new Date();
+  const getCurrentDay = new Date().getDate();
+  const currentMonthLastDate = new Date(
+    date.getFullYear(),
+    date.getMonth(),
+    0
+  ).getDate();
+  const totalEarnings = earnings * (getCurrentDay / currentMonthLastDate);
+  const getMaximum = totalEarnings * 0.5;
+  return Math.floor(getMaximum);
+};

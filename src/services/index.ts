@@ -12,6 +12,9 @@ const axiosApiEmbedHeader = axios.create({
 });
 axiosApiEmbedHeader.interceptors.request.use(
   async (configApi) => {
+    if (configApi.url == "/api/v1/signin") {
+      return configApi;
+    }
     const accessToken = await getAccessToken();
     if (accessToken && accessToken != undefined) {
       configApi.headers = {
@@ -37,10 +40,10 @@ axiosApiEmbedHeader.interceptors.response.use(
   }
 );
 
-const request = async ({ params = null, url, method }) => {
+const request = async ({ params, url, method }: any) => {
   return await axiosApiEmbedHeader({
     url,
-    params,
+    data: params,
     method,
   });
 };
@@ -50,6 +53,25 @@ export const getTransaction = async () => {
     method: "get",
     url: "/api/v1/user/transactions",
   });
+};
+
+export const getUser = async () => {
+  return await request({
+    method: "get",
+    url: "/api/v1/user/profile",
+  });
+};
+
+export const login = async (phone) => {
+  const response = await request({
+    method: "post",
+    url: "/api/v1/signin",
+    params: {
+      phone,
+    },
+  });
+  await useUpdateAccessToken(response.data.data.token);
+  return response;
 };
 
 export const logout = async () => {
@@ -71,6 +93,7 @@ export const useRemoveAccessToken = async () => {
 };
 
 export const useUpdateAccessToken = async (accessToken) => {
+  console.log(`accessToken`, accessToken);
   await Keychain.setInternetCredentials(
     ACCESS_TOKEN,
     ACCESS_TOKEN,
@@ -80,9 +103,7 @@ export const useUpdateAccessToken = async (accessToken) => {
 
 export const getAccessToken = async () => {
   const credentials = await Keychain.getInternetCredentials(ACCESS_TOKEN);
-  console.log(`credentials`, credentials);
-  return "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyVWlkIjoiam9obl91aWQiLCJwaG9uZSI6IjEiLCJpYXQiOjE3MTY4MjExMzMsImV4cCI6MTcxNjgyMTMxM30.3OK2P38fv1mD7xfjvultbsbqhwP1Y5LIPx2WATjxamo";
-  // return credentials;
+  return credentials && credentials.password;
 };
 
 export const setPinCode = async (pin) => {

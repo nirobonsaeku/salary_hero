@@ -1,6 +1,8 @@
 import React from "react";
 import { FlatList, Text, TouchableOpacity, View } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
+import styles from "./styles";
+import { color, spacing } from "../../themes";
 
 export const DialPad = (props) => {
   const { onPressKey } = props;
@@ -9,7 +11,7 @@ export const DialPad = (props) => {
       data={["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0", "del"]}
       numColumns={3}
       scrollEnabled={false}
-      style={{ flexGrow: 0 }}
+      style={styles.flex}
       renderItem={({ item, index }) => {
         return (
           <TouchableOpacity
@@ -18,27 +20,18 @@ export const DialPad = (props) => {
           >
             <View
               style={{
-                width: 60,
-                height: 60,
-                alignItems: "center",
                 borderWidth: item == "" ? 0 : 1,
-                borderRadius: 100,
-                justifyContent: "center",
-                margin: 12,
-                borderColor: "white",
+                ...styles.circle,
               }}
             >
               {item == "del" ? (
-                <Icon name="chevron-back-outline" size={22} color="white" />
+                <Icon
+                  name="chevron-back-outline"
+                  size={spacing.size24}
+                  color={color.white}
+                />
               ) : (
-                <Text
-                  style={{
-                    fontSize: 22,
-                    color: "white",
-                  }}
-                >
-                  {item}
-                </Text>
+                <Text style={styles.textNumber}>{item}</Text>
               )}
             </View>
           </TouchableOpacity>

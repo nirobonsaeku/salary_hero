@@ -6,6 +6,9 @@ import { constant } from "../../../themes/constants";
 import { Button, Gap, TextInputMask } from "../../../components";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import { useAppDispatch } from "../../../store/hooks";
+import { callLogin } from "../../../store/user";
+import styles from "./styles";
 
 const LoginSchema = Yup.object().shape({
   phoneNumber: Yup.string()
@@ -14,11 +17,13 @@ const LoginSchema = Yup.object().shape({
 });
 
 export const LoginScreen = ({ navigation, route }) => {
-  const handleSubmit = (values) => {
-    console.log(`handleSubmit`, values);
+  const dispatch = useAppDispatch();
+  const handleSubmit = async (values) => {
+    await dispatch(callLogin(values.phoneNumber));
+    navigation.replace("Pin");
   };
   return (
-    <ImageBackground source={images.bg} style={{ flex: 1 }}>
+    <ImageBackground source={images.bg} style={styles.screen}>
       <Formik
         initialValues={{
           phoneNumber: "",
@@ -27,7 +32,7 @@ export const LoginScreen = ({ navigation, route }) => {
         validateOnMount={true}
         onSubmit={handleSubmit}
       >
-        {({ errors, touched, isValid, handleChange, values, handleSubmit }) => (
+        {({ isValid, handleChange, values, handleSubmit }) => (
           <>
             <SafeAreaView
               style={{
@@ -55,7 +60,6 @@ export const LoginScreen = ({ navigation, route }) => {
               />
               <Button
                 title="Login"
-                // onPress={() => navigation.navigate("Pin")}
                 onPress={handleSubmit}
                 disabled={!isValid}
               />
