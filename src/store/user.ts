@@ -18,11 +18,7 @@ const usersSlice = createSlice({
     userFullName: "",
     loading: false,
   },
-  reducers: {
-    setUser(state, action) {
-      state.userFullName = action.payload;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(callLogin.pending, (state) => {
@@ -41,6 +37,6 @@ const usersSlice = createSlice({
   },
 });
 
-export const { setUser } = usersSlice.actions;
+export const {} = usersSlice.actions;
 
 export default usersSlice.reducer;

@@ -25,7 +25,7 @@ export const HomeScreen = ({ navigation, route }) => {
   return (
     <SafeAreaView style={styles.screen}>
       <Gap size={spacing.size24} />
-      <Card title="ยอดเงินทั้งหมด" subtitle={`${toPrice(available)} $`} />
+      <Card title="Available" subtitle={`${toPrice(available)} $`} />
       <Gap size={spacing.size24} />
       <Text style={styles.transactionText}>Transaction History</Text>
       <FlatList

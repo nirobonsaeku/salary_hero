@@ -33,7 +33,7 @@ axiosApiEmbedHeader.interceptors.response.use(
     return response;
   },
   async (error) => {
-    if (error.response && error.response.status === 403) {
+    if (error.response && error.response.status == 403) {
       await logout();
     }
     return Promise.reject(error);
@@ -52,6 +52,16 @@ export const getTransaction = async () => {
   return await request({
     method: "get",
     url: "/api/v1/user/transactions",
+  });
+};
+
+export const addWithdraw = async (amount) => {
+  return await request({
+    method: "post",
+    url: "/api/v1/user/withdraw",
+    params: {
+      amount,
+    },
   });
 };
 
@@ -85,15 +95,10 @@ export const logout = async () => {
 };
 
 export const useRemoveAccessToken = async () => {
-  try {
-    await Keychain.resetInternetCredentials(ACCESS_TOKEN);
-  } catch (err) {
-    console.log(`err`, err);
-  }
+  await Keychain.resetInternetCredentials(ACCESS_TOKEN);
 };
 
 export const useUpdateAccessToken = async (accessToken) => {
-  console.log(`accessToken`, accessToken);
   await Keychain.setInternetCredentials(
     ACCESS_TOKEN,
     ACCESS_TOKEN,
@@ -107,7 +112,6 @@ export const getAccessToken = async () => {
 };
 
 export const setPinCode = async (pin) => {
-  console.log(`pin`, pin);
   await Keychain.setInternetCredentials(
     PIN_TOKEN,
     PIN_TOKEN,
