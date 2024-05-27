@@ -8,6 +8,8 @@ import { callGetUser } from "../../../store/user";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { callWithdraw } from "../../../store/transaction";
+import styles from "./styles";
+import { spacing } from "../../../themes";
 
 const WithdrawSchema = Yup.object().shape({
   amount: Yup.number().min(1).required("Required"),
@@ -46,11 +48,11 @@ export const WithdrawScreen = ({ navigation, route }) => {
     >
       {({ isValid, handleChange, values, handleSubmit }) => (
         <>
-          <SafeAreaView style={{ flex: 1 }}>
+          <SafeAreaView style={styles.container}>
             <ScrollView>
-              <Gap size={24} />
+              <Gap size={spacing.size24} />
               <TransferCard name={userFullName} />
-              <Gap size={24} />
+              <Gap size={spacing.size24} />
               <TextInput
                 label="Amount For Withdraw"
                 keyboardType="number-pad"

@@ -5,7 +5,6 @@ import {
   HomeScreen,
   WithdrawScreen,
   SettingScreen,
-  ResetPinScreen,
 } from "../features";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -68,7 +67,6 @@ export default function App() {
       >
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Pin" component={PinScreen} />
-        <Stack.Screen name="ResetPin" component={ResetPinScreen} />
         <Stack.Screen name="MainTab" component={MainTab} />
       </Stack.Navigator>
     </NavigationContainer>

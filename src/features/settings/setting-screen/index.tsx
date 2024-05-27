@@ -5,7 +5,6 @@ import { List } from "../../../components/list";
 import styles from "./styles";
 import { logout } from "../../../services";
 
-
 export const SettingScreen = ({ navigation, route }) => {
   return (
     <View style={styles.container}>
