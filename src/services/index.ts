@@ -4,6 +4,7 @@ import Config from "react-native-config";
 import sha256 from "js-sha256";
 import { CommonActions } from "@react-navigation/native";
 import * as RootNavigation from "../navigation/root-navigation";
+import { PIN_LOGIN } from "../features";
 const ACCESS_TOKEN = "ACCESS_TOKEN";
 const PIN_TOKEN = "PIN_TOKEN";
 
@@ -86,6 +87,7 @@ export const login = async (phone) => {
 
 export const logout = async () => {
   await useRemoveAccessToken();
+  await useRemovePin();
   RootNavigation.navigate(
     CommonActions.reset({
       index: 0,
@@ -94,8 +96,34 @@ export const logout = async () => {
   );
 };
 
+export const checkTokenNotExpired = async () => {
+  try {
+    const user = await getUser();
+    
+    RootNavigation.navigate(
+      CommonActions.reset({
+        index: 0,
+        routes: [
+          {
+            name: "Pin",
+            params: {
+              type: PIN_LOGIN,
+            },
+          },
+        ],
+      })
+    );
+  } catch (err) {
+    console.log(`user err`, err);
+  }
+};
+
 export const useRemoveAccessToken = async () => {
   await Keychain.resetInternetCredentials(ACCESS_TOKEN);
+};
+
+export const useRemovePin = async () => {
+  await Keychain.resetInternetCredentials(PIN_TOKEN);
 };
 
 export const useUpdateAccessToken = async (accessToken) => {
@@ -112,6 +140,7 @@ export const getAccessToken = async () => {
 };
 
 export const setPinCode = async (pin) => {
+  console.log(`pin`,pin)
   await Keychain.setInternetCredentials(
     PIN_TOKEN,
     PIN_TOKEN,
@@ -121,7 +150,9 @@ export const setPinCode = async (pin) => {
 
 export const comparePin = async (currentPin) => {
   const oldPin = await Keychain.getInternetCredentials(PIN_TOKEN);
+  console.log(`oldPin`,oldPin)
   const hash = sha256.sha256(currentPin);
-  return oldPin.toString() == hash;
+  return  oldPin.password == hash;
+  
 };
 export default axiosApiEmbedHeader;

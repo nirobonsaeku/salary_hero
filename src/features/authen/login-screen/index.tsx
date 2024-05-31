@@ -1,14 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { Image, ImageBackground } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { images } from "../../../assets/images";
-import { constant } from "../../../themes/constants";
 import { Button, Gap, TextInputMask } from "../../../components";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { useAppDispatch } from "../../../store/hooks";
-import { callLogin } from "../../../store/user";
 import styles from "./styles";
+import { checkTokenNotExpired } from "../../../services";
+import { spacing } from "../../../themes";
 
 const LoginSchema = Yup.object().shape({
   phoneNumber: Yup.string()
@@ -17,11 +16,20 @@ const LoginSchema = Yup.object().shape({
 });
 
 export const LoginScreen = ({ navigation, route }) => {
-  const dispatch = useAppDispatch();
-  const handleSubmit = async (values) => {
-    await dispatch(callLogin(values.phoneNumber));
-    navigation.replace("Pin");
+  useEffect(() => {
+    fetchInit();
+  }, []);
+
+  const fetchInit = async () => {
+    await checkTokenNotExpired();
   };
+
+  const handleSubmit = (values) => {
+    navigation.replace("OTP", {
+      phoneNumber: values.phoneNumber,
+    });
+  };
+
   return (
     <ImageBackground source={images.bg} style={styles.screen}>
       <Formik
@@ -42,12 +50,7 @@ export const LoginScreen = ({ navigation, route }) => {
             >
               <Image
                 source={images.logo}
-                style={{
-                  width: constant.width / 2,
-                  height: constant.width / 2,
-                  alignSelf: "center",
-                  marginTop: 30,
-                }}
+                style={styles.image}
                 resizeMode="contain"
               />
               <TextInputMask
@@ -63,7 +66,7 @@ export const LoginScreen = ({ navigation, route }) => {
                 onPress={handleSubmit}
                 disabled={!isValid}
               />
-              <Gap size={32} />
+              <Gap size={spacing.size32} />
             </SafeAreaView>
           </>
         )}

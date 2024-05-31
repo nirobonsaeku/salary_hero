@@ -5,6 +5,7 @@ import {
   HomeScreen,
   WithdrawScreen,
   SettingScreen,
+  OTPScreen,
 } from "../features";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -12,7 +13,22 @@ import Icon from "react-native-vector-icons/Ionicons";
 import { navigationRef } from "./root-navigation";
 
 const Stack = createNativeStackNavigator();
+const AuthenStack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
+
+const AuthenStackScreen = () => {
+  return (
+    <AuthenStack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <AuthenStack.Screen name="Login" component={LoginScreen} />
+      <AuthenStack.Screen name="OTP" component={OTPScreen} />
+      <AuthenStack.Screen name="Pin" component={PinScreen} />
+    </AuthenStack.Navigator>
+  );
+};
 
 const MainTab = () => {
   return (
@@ -60,13 +76,12 @@ export default function App() {
   return (
     <NavigationContainer ref={navigationRef}>
       <Stack.Navigator
-        initialRouteName="Login"
+        initialRouteName="Authen"
         screenOptions={{
           headerShown: false,
         }}
       >
-        <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="Pin" component={PinScreen} />
+        <Stack.Screen name="Authen" component={AuthenStackScreen} />
         <Stack.Screen name="MainTab" component={MainTab} />
       </Stack.Navigator>
     </NavigationContainer>
