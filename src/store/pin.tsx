@@ -38,20 +38,19 @@ const pinSlice = createSlice({
                     routes: [{ name: "MainTab" }],
                   })
                 );
-                state.value = [];
               } else {
                 Alert.alert("Your Pin not match!!!");
-                state.value = [];
               }
             });
           }
         }
       }
     },
+    clearPinState:(state)=>initialState,
   },
   extraReducers: (builder) => {},
 });
 
-export const { onChangePin } = pinSlice.actions;
+export const { onChangePin,clearPinState } = pinSlice.actions;
 
 export default pinSlice.reducer;

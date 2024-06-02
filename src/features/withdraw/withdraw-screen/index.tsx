@@ -24,7 +24,8 @@ export const WithdrawScreen = ({ navigation, route }) => {
   }, []);
 
   const handleSubmit = async (values) => {
-    const maximun = calculateEarning(30000);
+    const maximun = calculateEarning(30000,);
+    console.log(`maximun`,maximun)
     if (maximun > parseInt(values.amount)) {
       return dispatch(callWithdraw(values.amount));
     }

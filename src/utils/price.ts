@@ -11,12 +11,13 @@ export const toPrice = (x) => {
 
 export const calculateEarning = (earnings) => {
   const date = new Date();
-  const getCurrentDay = new Date().getDate();
+  const getCurrentDay = date.getDate();
   const currentMonthLastDate = new Date(
     date.getFullYear(),
-    date.getMonth(),
+    date.getMonth() + 1,
     0
   ).getDate();
+  
   const totalEarnings = earnings * (getCurrentDay / currentMonthLastDate);
   const getMaximum = totalEarnings * 0.5;
   return Math.floor(getMaximum);
