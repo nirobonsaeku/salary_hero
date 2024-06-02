@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
-import { spacing } from "../../../themes";
-import { constant } from "../../../themes/constants";
+import { spacing } from "@themes";
+import { constant } from "@themes/constants";
 
 export default StyleSheet.create({
   screen: { flex: 1 },

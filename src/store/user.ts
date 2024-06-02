@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getUser, login } from "../services";
+import { getUser, login } from "@services";
 
 export const callLogin = createAsyncThunk("user/login", async (phone) => {
   phone = phone.split("-").join("");

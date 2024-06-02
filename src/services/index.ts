@@ -3,8 +3,8 @@ import * as Keychain from "react-native-keychain";
 import Config from "react-native-config";
 import sha256 from "js-sha256";
 import { CommonActions } from "@react-navigation/native";
-import * as RootNavigation from "../navigation/root-navigation";
-import { PIN_LOGIN } from "../features";
+import * as RootNavigation from "@navigation/root-navigation";
+import { PIN_LOGIN } from "@features";
 const ACCESS_TOKEN = "ACCESS_TOKEN";
 const PIN_TOKEN = "PIN_TOKEN";
 

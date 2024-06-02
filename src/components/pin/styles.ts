@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { spacing } from "../../themes";
+import { spacing } from "@themes";
 
 export default StyleSheet.create({
   view: {

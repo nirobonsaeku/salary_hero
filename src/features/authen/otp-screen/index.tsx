@@ -8,9 +8,9 @@ import {
 } from "react-native-confirmation-code-field";
 import styles from "./styles";
 import { CELL_COUNT, PIN_CREATE } from "../constants";
-import { images } from "../../../assets/images";
-import { useAppDispatch } from "../../../store/hooks";
-import { callLogin } from "../../../store/user";
+import { images } from "@assets/images";
+import { useAppDispatch } from "@store/hooks";
+import { callLogin } from "@store/user";
 
 export const OTPScreen = (props) => {
   const dispatch = useAppDispatch();

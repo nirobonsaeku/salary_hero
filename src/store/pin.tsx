@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { comparePin, setPinCode } from "../services";
-import * as RootNavigation from "../navigation/root-navigation";
+import { comparePin, setPinCode } from "@services";
+import * as RootNavigation from "@navigation/root-navigation";
 import { CommonActions } from "@react-navigation/native";
-import { PIN_CREATE } from "../features";
+import { PIN_CREATE } from "@features";
 import { Alert } from "react-native";
 
 const initialState = {

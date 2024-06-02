@@ -2,7 +2,7 @@ import React from "react";
 import { FlatList, Text, TouchableOpacity, View } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import styles from "./styles";
-import { color, spacing } from "../../themes";
+import { color, spacing } from "@themes";
 
 export const DialPad = (props) => {
   const { onPressKey } = props;

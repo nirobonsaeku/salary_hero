@@ -1,15 +1,15 @@
 import React, { useEffect } from "react";
 import { ActivityIndicator, Alert, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Button, Gap, TextInput, TransferCard } from "../../../components";
-import { calculateEarning } from "../../../utils";
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { callGetUser } from "../../../store/user";
+import { Button, Gap, TextInput, TransferCard } from "@components";
+import { calculateEarning } from "@utils";
+import { useAppDispatch, useAppSelector } from "@store/hooks";
+import { callGetUser } from "@store/user";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { callWithdraw } from "../../../store/transaction";
+import { callWithdraw } from "@store/transaction";
 import styles from "./styles";
-import { spacing } from "../../../themes";
+import { spacing } from "@themes";
 
 const WithdrawSchema = Yup.object().shape({
   amount: Yup.number().min(1).required("Required"),

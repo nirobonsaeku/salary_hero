@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { addWithdraw, getTransaction } from "../services";
+import { addWithdraw, getTransaction } from "@services";
 import { Alert } from "react-native";
 
 export const fetchTransaction = createAsyncThunk(

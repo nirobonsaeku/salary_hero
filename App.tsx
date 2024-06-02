@@ -7,9 +7,9 @@
 
 import React from "react";
 
-import AppNavigation from "./src/navigation/main-navigation";
+import AppNavigation from "@navigation/main-navigation";
 import { Provider } from "react-redux";
-import { store } from "./src/store";
+import { store } from "@store";
 
 function App(): React.JSX.Element {
   return (

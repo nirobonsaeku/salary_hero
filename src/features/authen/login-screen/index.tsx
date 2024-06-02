@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import { Image, ImageBackground } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { images } from "../../../assets/images";
-import { Button, Gap, TextInputMask } from "../../../components";
+import { images } from "@assets/images";
+import { Button, Gap, TextInputMask } from "@components";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import styles from "./styles";
-import { checkTokenNotExpired } from "../../../services";
-import { spacing } from "../../../themes";
+import { checkTokenNotExpired } from "@services";
+import { spacing } from "@themes";
 
 const LoginSchema = Yup.object().shape({
   phoneNumber: Yup.string()
