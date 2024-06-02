@@ -91,7 +91,7 @@ export const logout = async () => {
   RootNavigation.navigate(
     CommonActions.reset({
       index: 0,
-      routes: [{ name: "Login" }],
+      routes: [{ name: "Authen" }],
     })
   );
 };
@@ -99,23 +99,22 @@ export const logout = async () => {
 export const checkTokenNotExpired = async () => {
   try {
     const user = await getUser();
-    
-    RootNavigation.navigate(
-      CommonActions.reset({
-        index: 0,
-        routes: [
-          {
-            name: "Pin",
-            params: {
-              type: PIN_LOGIN,
+    if (user) {
+      RootNavigation.navigate(
+        CommonActions.reset({
+          index: 0,
+          routes: [
+            {
+              name: "Pin",
+              params: {
+                type: PIN_LOGIN,
+              },
             },
-          },
-        ],
-      })
-    );
-  } catch (err) {
-    console.log(`user err`, err);
-  }
+          ],
+        })
+      );
+    }
+  } catch (err) {}
 };
 
 export const useRemoveAccessToken = async () => {
@@ -140,7 +139,6 @@ export const getAccessToken = async () => {
 };
 
 export const setPinCode = async (pin) => {
-  console.log(`pin`,pin)
   await Keychain.setInternetCredentials(
     PIN_TOKEN,
     PIN_TOKEN,
@@ -150,9 +148,7 @@ export const setPinCode = async (pin) => {
 
 export const comparePin = async (currentPin) => {
   const oldPin = await Keychain.getInternetCredentials(PIN_TOKEN);
-  console.log(`oldPin`,oldPin)
   const hash = sha256.sha256(currentPin);
-  return  oldPin.password == hash;
-  
+  return oldPin.password == hash;
 };
 export default axiosApiEmbedHeader;

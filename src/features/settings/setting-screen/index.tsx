@@ -13,7 +13,7 @@ export const SettingScreen = ({ navigation, route }) => {
           title={"Setting Pin"}
           onPress={() => navigation.navigate("ResetPin")}
         />
-        <List title={"Logout"} onPress={() => logout()} />
+        <List title={"Logout"} onPress={logout} />
       </SafeAreaView>
     </View>
   );

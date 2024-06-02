@@ -42,12 +42,7 @@ export const LoginScreen = ({ navigation, route }) => {
       >
         {({ isValid, handleChange, values, handleSubmit }) => (
           <>
-            <SafeAreaView
-              style={{
-                flex: 1,
-                justifyContent: "space-between",
-              }}
-            >
+            <SafeAreaView style={styles.container}>
               <Image
                 source={images.logo}
                 style={styles.image}

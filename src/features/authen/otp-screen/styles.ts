@@ -10,7 +10,7 @@ export default StyleSheet.create({
     color: color.primary,
     marginBottom: spacing.size32,
   },
-  codeFieldRoot: { marginTop: 20 },
+  codeFieldRoot: { marginTop: spacing.size20 },
   cell: {
     width: spacing.size32,
     height: spacing.size32,
